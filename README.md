@@ -1,3 +1,4 @@
+```bash
 > what is this?
 
   personal portfolio and blog.
@@ -25,3 +26,4 @@
 
   https://jos.hn
   https://x.com/nishimiya
+```
