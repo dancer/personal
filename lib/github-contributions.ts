@@ -14,8 +14,14 @@ async function fetchForUsername(
 		);
 		const response = await fetch(url, { signal: AbortSignal.timeout(12_000) });
 		if (!response.ok) return [];
-		const data = (await response.json()) as { contributions: Activity[] };
-		return data.contributions;
+		const data: unknown = await response.json();
+		if (
+			!data ||
+			typeof data !== "object" ||
+			!("contributions" in data) ||
+			!Array.isArray((data as { contributions: unknown }).contributions)
+		) return [];
+		return (data as { contributions: Activity[] }).contributions;
 	} catch {
 		return [];
 	}

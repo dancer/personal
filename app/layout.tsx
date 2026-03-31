@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { JsonLd } from "@/components/json-ld";
-import { ThemeProvider } from "@/contexts/theme-context";
 import { SITE_DEFAULT_DESCRIPTION, SITE_URL, ogImagePath } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -45,16 +44,14 @@ export default function RootLayout({
 				>
 					skip to content
 				</a>
-				<ThemeProvider>
-					<main
-						id="main-content"
-						className="min-h-screen flex items-start justify-center relative"
-					>
-						<div className="w-full max-w-4xl px-4 md:px-16 py-8 md:py-12">
-							{children}
-						</div>
-					</main>
-				</ThemeProvider>
+			<main
+				id="main-content"
+				className="min-h-screen flex items-start justify-center relative"
+			>
+				<div className="w-full max-w-4xl px-4 md:px-16 py-8 md:py-12">
+					{children}
+				</div>
+			</main>
 			</body>
 		</html>
 	);

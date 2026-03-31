@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import Header from "@/components/header";
+import { ogImagePath } from "@/lib/site";
+
+export const metadata: Metadata = {
+	title: "uses",
+	description: "hardware and software i use every day.",
+	openGraph: {
+		images: [{ url: ogImagePath({ title: "uses" }), width: 1200, height: 630 }],
+	},
+};
 
 export default function Uses() {
 	return (

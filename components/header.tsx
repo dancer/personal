@@ -1,4 +1,4 @@
-import DropdownMenu from "@/components/dropdown-menu";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { CopyEmailButton } from "@/components/email";
 import RESUME from "@/data/resume";
 import Link from "next/link";
@@ -30,46 +30,43 @@ function GitHubIcon() {
 export default function Header() {
 	return (
 		<div className="flex flex-col md:flex-row md:justify-between md:items-start border-b border-border/30 pb-6 mb-12 relative">
-			<div className="hidden md:block absolute -left-9 top-0">
-				<DropdownMenu />
-			</div>
 			<div>
-				<div className="flex items-center gap-2 mb-3">
-					<div className="md:hidden">
-						<DropdownMenu />
-					</div>
-					<h1 className="text-sm font-bold">{RESUME.name.toLowerCase()}</h1>
-					<div className="flex items-center">
-						<a
-							href="https://x.com/nishimiya"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-muted-foreground hover:text-foreground transition-colors p-1"
-							aria-label="Twitter"
-						>
-							<TwitterIcon />
-						</a>
-						<a
-							href="https://bsky.app/profile/someo.ne"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-muted-foreground hover:text-foreground transition-colors p-1"
-							aria-label="Bluesky"
-						>
-							<BlueskyIcon />
-						</a>
-						<CopyEmailButton />
-						<a
-							href="https://github.com/dancer"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-muted-foreground hover:text-foreground transition-colors p-1"
-							aria-label="GitHub"
-						>
-							<GitHubIcon />
-						</a>
+				<div className="flex items-center justify-between md:justify-start gap-2 mb-3">
+					<div className="flex items-center gap-2">
+						<h1 className="text-sm font-bold">{RESUME.name.toLowerCase()}</h1>
+						<div className="flex items-center">
+							<a
+								href="https://x.com/nishimiya"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-muted-foreground hover:text-foreground transition-colors p-1"
+								aria-label="X (Twitter)"
+							>
+								<TwitterIcon />
+							</a>
+							<a
+								href="https://bsky.app/profile/someo.ne"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-muted-foreground hover:text-foreground transition-colors p-1"
+								aria-label="Bluesky"
+							>
+								<BlueskyIcon />
+							</a>
+							<CopyEmailButton />
+							<a
+								href="https://github.com/dancer"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-muted-foreground hover:text-foreground transition-colors p-1"
+								aria-label="GitHub"
+							>
+								<GitHubIcon />
+							</a>
+						</div>
 					</div>
 				</div>
+			<div className="flex items-center justify-between">
 				<nav className="flex flex-wrap gap-2 md:gap-4 text-muted-foreground text-sm">
 					<Link href="/" className="hover:text-foreground transition-colors">
 						home
@@ -81,10 +78,16 @@ export default function Header() {
 						uses
 					</Link>
 				</nav>
+				<div className="flex items-center md:hidden">
+					<ThemeToggle />
+					<span className="text-muted-foreground text-sm">N. Ireland</span>
+				</div>
 			</div>
-			<div className="text-muted-foreground text-sm hidden md:block">
-				N. Ireland
-			</div>
+		</div>
+		<div className="hidden md:flex items-center text-muted-foreground text-sm">
+			<ThemeToggle />
+			N. Ireland
+		</div>
 		</div>
 	);
 }

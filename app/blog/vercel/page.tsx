@@ -1,34 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/header";
+import { ogImagePath } from "@/lib/site";
 
 export const metadata: Metadata = {
 	title: "how i accidentally joined vercel",
 	description:
 		"from a random hello at v0 summit to building the future of ai development tools.",
 	openGraph: {
-		title: "how i accidentally joined vercel",
-		description:
-			"from a random hello at v0 summit to building the future of ai development tools.",
-		images: [
-			{
-				url: "/api/og?title=how%20i%20accidentally%20joined%20vercel&description=from%20a%20random%20hello%20at%20v0%20summit%20to%20building%20the%20future%20of%20ai%20development%20tools.",
-				width: 1200,
-				height: 630,
-				alt: "how i accidentally joined vercel",
-			},
-		],
+		images: [{ url: ogImagePath({ title: "how i accidentally joined vercel" }), width: 1200, height: 630 }],
 		locale: "en_US",
 		type: "article",
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "how i accidentally joined vercel",
-		description:
-			"from a random hello at v0 summit to building the future of ai development tools.",
-		images: [
-			"/api/og?title=how%20i%20accidentally%20joined%20vercel&description=from%20a%20random%20hello%20at%20v0%20summit%20to%20building%20the%20future%20of%20ai%20development%20tools.",
-		],
+		images: [ogImagePath({ title: "how i accidentally joined vercel" })],
 	},
 };
 

@@ -3,7 +3,7 @@
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is([data-theme="dark"] *));
 
 @theme {
 	--font-sans:
@@ -133,11 +133,16 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+	button, a {
+		touch-action: manipulation;
+		cursor: pointer;
+	}
 }
 
 html {
 	scroll-behavior: smooth;
 	overflow-y: scroll;
+	touch-action: manipulation;
 }
 
 .prose {
@@ -183,6 +188,30 @@ html {
 	.animate-slide-in {
 		animation: none;
 	}
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.4s;
+	animation-timing-function: ease;
+}
+
+::view-transition-old(root) {
+	animation-name: theme-fade-out;
+}
+
+::view-transition-new(root) {
+	animation-name: theme-fade-in;
+}
+
+@keyframes theme-fade-out {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes theme-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
 ::selection {

@@ -13,7 +13,11 @@ export function JsonLd() {
 			name: e.company,
 			url: e.company_website,
 		})),
-		sameAs: ["https://github.com/dancer"],
+		sameAs: [
+			"https://github.com/dancer",
+			"https://x.com/nishimiya",
+			"https://bsky.app/profile/someo.ne",
+		],
 	};
 
 	const website = {

@@ -26,9 +26,11 @@ export function CopyEmailButton() {
 	const [copied, setCopied] = useState(false);
 
 	const handleCopy = async () => {
-		await navigator.clipboard.writeText("josh@afterima.ge");
-		setCopied(true);
-		setTimeout(() => setCopied(false), 2000);
+		try {
+			await navigator.clipboard.writeText("josh@afterima.ge");
+			setCopied(true);
+			setTimeout(() => setCopied(false), 2000);
+		} catch {}
 	};
 
 	return (

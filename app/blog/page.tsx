@@ -27,11 +27,14 @@ export default function Blog() {
 					>
 						<div className="col-span-1 md:col-span-3 text-muted-foreground text-sm font-medium mb-2 md:mb-0">
 							<div>
-								{new Date(post.date).toLocaleDateString("en-US", {
+							{(() => {
+								const [y, m, d] = post.date.split("-").map(Number);
+								return new Date(y, m - 1, d).toLocaleDateString("en-US", {
 									month: "short",
 									day: "numeric",
 									year: "numeric",
-								})}
+								});
+							})()}
 							</div>
 							<div className="mt-1">{post.readTime}</div>
 						</div>
