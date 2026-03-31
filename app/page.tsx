@@ -1,36 +1,12 @@
-import { unstable_cache } from "next/cache";
 import Link from "next/link";
 import { Contributions } from "@/components/contributions";
 import Header from "@/components/header";
-import type { Activity } from "@/components/ui/kibo-ui/contribution-graph";
 import RESUME from "@/data/resume";
-
-const username = "dancer";
-const getCachedContributions = unstable_cache(
-	async () => {
-		const url = new URL(
-			`/v4/${username}`,
-			"https://github-contributions-api.jogruber.de",
-		);
-		const response = await fetch(url);
-		const data = (await response.json()) as {
-			total: { [year: string]: number };
-			contributions: Activity[];
-		};
-		const total = data.total[new Date().getFullYear()];
-		const TOTAL_SQUARES = 417;
-
-		const sortedData = data.contributions.sort(
-			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-		);
-		return { contributions: sortedData.slice(0, TOTAL_SQUARES), total };
-	},
-	["github-contributions"],
-	{ revalidate: 60 * 60 * 24 },
-);
+import { getCachedContributions } from "@/lib/github-contributions";
 
 export default async function Home() {
-	const { contributions, total } = await getCachedContributions();
+	const { contributions } = await getCachedContributions();
+
 	return (
 		<div className="font-mono text-sm leading-relaxed max-w-6xl">
 			<Header />
@@ -45,14 +21,16 @@ export default async function Home() {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-16">
-					<div className="col-span-1 md:col-span-3 text-muted-foreground text-sm font-medium mb-2 md:mb-0">
-						Recent GitHub Activity
+				{contributions.length > 0 && (
+					<div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-16">
+						<div className="col-span-1 md:col-span-3 text-muted-foreground text-sm font-medium mb-2 md:mb-0">
+							Recent GitHub Activity
+						</div>
+						<div className="col-span-1 md:col-span-9">
+							<Contributions data={contributions} />
+						</div>
 					</div>
-					<div className="col-span-1 md:col-span-9">
-						<Contributions data={contributions} />
-					</div>
-				</div>
+				)}
 
 				<div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-16">
 					<div className="col-span-1 md:col-span-3 text-muted-foreground text-sm font-medium mb-2 md:mb-0">
@@ -75,14 +53,10 @@ export default async function Home() {
 										</span>
 									</div>
 									<div className="text-muted-foreground leading-relaxed mb-3">
-										{experience.company === "Vercel"
-											? "Building next-generation web applications and AI developer tools. Currently helping build the AI SDK and focused on developer experience."
-											: "Leveraging AI to intelligently process PDFs, receipts, and financial documents. Building machine learning systems that extract, understand, and automate complex document workflows."}
+										{experience.description}
 									</div>
 									<div className="text-muted-foreground text-xs">
-										{experience.company === "Vercel"
-											? "Jun 2025 to Present — London / SF"
-											: "Oct 2024 to Mar 2025 — Remote"}
+										{experience.display_range}
 									</div>
 								</div>
 							))}
@@ -99,39 +73,20 @@ export default async function Home() {
 							<div>
 								<div className="mb-2">
 									<span className="text-foreground font-medium">
-										MDX University
+										{RESUME.education.institution}
 									</span>
 								</div>
 								<div className="text-muted-foreground">
-									BSc in Computer Science
+									{RESUME.education.degree} in {RESUME.education.major}
 								</div>
 							</div>
-							<div className="text-muted-foreground">2024-2026</div>
+							<div className="text-muted-foreground">
+								{RESUME.education.display_range}
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-16">
-					<div className="col-span-1 md:col-span-3 text-muted-foreground text-sm font-medium mb-2 md:mb-0">
-						Skills
-					</div>
-					<div className="col-span-1 md:col-span-9">
-						<div className="text-muted-foreground leading-relaxed">
-							Go; Rust; TypeScript; Java; Python
-						</div>
-					</div>
-				</div>
-
-				<div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-16">
-					<div className="col-span-1 md:col-span-3 text-muted-foreground text-sm font-medium mb-2 md:mb-0">
-						Interests
-					</div>
-					<div className="col-span-1 md:col-span-9">
-						<div className="text-muted-foreground leading-relaxed">
-							Open source; Gaming; Pokemon; Inazuma Eleven
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	);

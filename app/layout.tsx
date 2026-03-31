@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ClientDropdownWrapper from "@/components/client-dropdown-wrapper";
+import { JsonLd } from "@/components/json-ld";
 import { ThemeProvider } from "@/contexts/theme-context";
+import { SITE_DEFAULT_DESCRIPTION, SITE_URL, ogImagePath } from "@/lib/site";
 
 export const metadata: Metadata = {
-	title: "josh",
-	description: "cs student at mdx, software engineer.",
-	metadataBase: new URL("https://jos.hn"),
+	title: { default: "josh", template: "%s — josh" },
+	description: SITE_DEFAULT_DESCRIPTION,
+	metadataBase: new URL(SITE_URL),
 	openGraph: {
-		description: "cs student at mdx, software engineer.",
+		description: SITE_DEFAULT_DESCRIPTION,
 		images: [
 			{
-				url: "/api/og?description=cs%20student%20at%20mdx%2C%20software%20engineer.",
+				url: ogImagePath({ description: SITE_DEFAULT_DESCRIPTION }),
 				width: 1200,
 				height: 630,
-				alt: "cs student at mdx, software engineer.",
+				alt: SITE_DEFAULT_DESCRIPTION,
 			},
 		],
 		locale: "en_US",
@@ -22,10 +23,8 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		description: "cs student at mdx, software engineer.",
-		images: [
-			"/api/og?description=cs%20student%20at%20mdx%2C%20software%20engineer.",
-		],
+		description: SITE_DEFAULT_DESCRIPTION,
+		images: [ogImagePath({ description: SITE_DEFAULT_DESCRIPTION })],
 	},
 };
 
@@ -36,10 +35,21 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				<JsonLd />
+			</head>
 			<body className="antialiased font-mono">
+				<a
+					href="#main-content"
+					className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-background focus:text-foreground focus:px-3 focus:py-1.5 focus:rounded focus:text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+				>
+					skip to content
+				</a>
 				<ThemeProvider>
-					<ClientDropdownWrapper />
-					<main className="min-h-screen flex items-start justify-center pt-16 md:pt-20 relative">
+					<main
+						id="main-content"
+						className="min-h-screen flex items-start justify-center relative"
+					>
 						<div className="w-full max-w-4xl px-4 md:px-16 py-8 md:py-12">
 							{children}
 						</div>

@@ -1,22 +1,27 @@
-personal portfolio
+> what is this?
 
-### features
+  personal portfolio and blog.
 
-- dynamic og images
-- github contributions
-- blog posts
-- dark/light mode
+> features?
 
-### tech
+  ✓ dynamic og images
+  ✓ github contributions (3 accounts merged)
+  ✓ blog posts
+  ✓ dark/light mode
 
-- next.js 15
-- tailwind css v4
-- typescript
-- vercel
+> tech?
 
-### dev
+  next.js 16
+  tailwind css v4
+  typescript
+  vercel
 
-```bash
-bun install
-bun dev
-```
+> dev?
+
+  bun install
+  bun dev
+
+> links?
+
+  https://jos.hn
+  https://x.com/nishimiya

@@ -1,18 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/header";
+import { getPublishedPosts } from "@/data/blog";
+import { SITE_DEFAULT_DESCRIPTION, ogImagePath } from "@/lib/site";
 
-const posts = [
-	{
-		title: "how i accidentally joined vercel",
-		date: "2025-09-22",
-		slug: "vercel",
-		description:
-			"from a random hello at v0 summit to building the future of ai development tools.",
-		readTime: "12 min read",
+export const metadata: Metadata = {
+	title: "blog",
+	description: SITE_DEFAULT_DESCRIPTION,
+	openGraph: {
+		images: [{ url: ogImagePath({ title: "blog" }), width: 1200, height: 630 }],
 	},
-];
+};
 
 export default function Blog() {
+	const posts = getPublishedPosts();
+
 	return (
 		<div className="font-mono text-sm leading-relaxed max-w-6xl">
 			<Header />
