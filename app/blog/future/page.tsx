@@ -282,6 +282,11 @@ export default function BuildShipPost() {
 							</p>
 
 							<p>
+								turns out vercel has a name for it. ITG. iterate to greatness.
+								i was living their values before i even knew what they were.
+							</p>
+
+							<p>
 								if you read my{" "}
 								<Link
 									href="/blog/vercel"
