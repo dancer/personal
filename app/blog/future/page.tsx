@@ -113,8 +113,11 @@ export default function BuildShipPost() {
 
 							<p>
 								some massive resort. the kind of place where you walk outside and
-								think "wait, is this real." the whole team is there, nico,
-								gregor, aayush, felix, and we're not in meetings all day. we're
+								think "wait, is this real." the whole team is there,{" "}
+								<Link href="https://x.com/nicoalbanese10" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">nico</Link>,{" "}
+								<Link href="https://x.com/gr2m" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">gregor</Link>,{" "}
+								<Link href="https://x.com/aayushkapoor_" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">aayush</Link>,{" "}
+								<Link href="https://x.com/felixarntz" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors">felix</Link>, and we're not in meetings all day. we're
 								just hacking. sitting together outside in the sun, laptops out,
 								digging into the realtime api spec, bouncing ideas, breaking
 								things, laughing about it. swimming between sessions. eating
